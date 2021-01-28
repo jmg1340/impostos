@@ -1,0 +1,313 @@
+{
+	"any": 2020,
+	"llogaters": [
+		{
+			"nom": "llogater A",
+			"factures": [
+				{
+					"data": "2020/1/1",
+					"numero": 10,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						},
+						{
+							"concepte": "suministres",
+							"import1": 30,
+							"p_iva": 0,
+							"p_irpf": 0
+						}
+					]
+				},
+				{
+					"data": "2020/2/1",
+					"numero": 11,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/3/1",
+					"numero": 12,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/4/1",
+					"numero": 13,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/5/1",
+					"numero": 14,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/6/1",
+					"numero": 15,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/7/1",
+					"numero": 16,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/8/1",
+					"numero": 17,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/9/1",
+					"numero": 18,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/10/1",
+					"numero": 19,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/11/1",
+					"numero": 20,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/12/1",
+					"numero": 21,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater A",
+							"import1": 100,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				}
+			]
+		},
+
+		
+		{
+			"nom": "llogater B",
+			"factures": [
+				{
+					"data": "2020/1/1",
+					"numero": 101,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/2/1",
+					"numero": 102,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/3/1",
+					"numero": 103,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/4/1",
+					"numero": 104,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/5/1",
+					"numero": 105,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/6/1",
+					"numero": 106,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/7/1",
+					"numero": 107,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/8/1",
+					"numero": 108,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/9/1",
+					"numero": 109,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/10/1",
+					"numero": 110,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/11/1",
+					"numero": 111,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				},
+				{
+					"data": "2020/12/1",
+					"numero": 112,
+					"items": [
+						{
+							"concepte": "concepte 1 llogater B",
+							"import1": 50,
+							"p_iva": 0.21,
+							"p_irpf": 0.19
+						}
+					]
+				}
+			]
+		}
+
+		
+	]
+}
