@@ -95,7 +95,7 @@ export default {
   .capsalera::v-deep
 
     /* height or max-height is important */
-    height: 300px
+    height: 350px
 
     .q-table__top
       /* bg color is important for th; just specify one */

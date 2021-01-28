@@ -42,7 +42,7 @@
           
           <q-item>
             <div class="col"> Rebut del banc hauria de ser: 
-              <q-chip dense class="glossy" color="red" text-color="white">{{ rebutBanc }} €</q-chip>
+              <q-chip dense class="glossy" color="red" text-color="white">{{ rebutBanc * 2}}€ </q-chip> ({{ rebutBanc }} x 2)
             </div> 
           </q-item>
         </q-list>
@@ -68,23 +68,29 @@ export default {
 
     items2 () {
       return this.factura.items.map( obj => {
-        obj.importIva = obj.import1 * obj.p_iva,
-        obj.importIrpf = obj.import1 * obj.p_irpf
+        obj.importIva = this.round( obj.import1 * obj.p_iva ,2),
+        obj.importIrpf = this.round( obj.import1 * obj.p_irpf ,2)
         return obj
       })
     },
 
     total () {
       return { 
-        iva: this.items2.reduce( (total, obj) => total += obj.importIva, 0 ), 
-        irpf: this.items2.reduce( (total, obj) => total += obj.importIrpf, 0 ), 
-        import:this.items2.reduce( (total, obj) => total += obj.import1, 0 )
+        iva: this.round( this.items2.reduce( (total, obj) => total += obj.importIva, 0 ),  2), 
+        irpf: this.round( this.items2.reduce( (total, obj) => total += obj.importIrpf, 0 ),  2), 
+        import:this.round( this.items2.reduce( (total, obj) => total += obj.import1, 0 ),  2)
       }
     },
 
     rebutBanc () {
       return this.total.import + this.total.iva - this.total.irpf
     }
+  },
+
+  methods: {
+    round (value, decimals) {
+      return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+    } 
   }
 
 

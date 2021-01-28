@@ -19,11 +19,11 @@ export function arrInfo(state, getters) {
             objInfo.trimestre = trimestre(objFactura.data)
             objInfo.data = objFactura.data
             objInfo.numFactura = objFactura.numero
-            objInfo.IVA= items2(objFactura.items).reduce( (total, obj) => total += obj.importIva, 0 ), 
-            objInfo.IRPF= items2(objFactura.items).reduce( (total, obj) => total += obj.importIrpf, 0 ), 
-            objInfo.IMPORT= items2(objFactura.items).reduce( (total, obj) => total += obj.import1, 0 )
-            objInfo.BI_IVA= items2(objFactura.items).reduce( (total, obj) => total += (obj.p_iva == 0 ? 0 : obj.import1), 0 )
-            objInfo.BI_IRPF= items2(objFactura.items).reduce( (total, obj) => total += (obj.p_irpf == 0 ? 0 : obj.import1), 0 )
+            objInfo.IVA= round( items2(objFactura.items).reduce( (total, obj) => total += obj.importIva, 0 ) ,2)
+            objInfo.IRPF= round( items2(objFactura.items).reduce( (total, obj) => total += obj.importIrpf, 0 ) ,2)
+            objInfo.IMPORT= round( items2(objFactura.items).reduce( (total, obj) => total += obj.import1, 0 ) ,2)
+            objInfo.BI_IVA= round( items2(objFactura.items).reduce( (total, obj) => total += (obj.p_iva == 0 ? 0 : obj.import1), 0) ,2)
+            objInfo.BI_IRPF= round( items2(objFactura.items).reduce( (total, obj) => total += (obj.p_irpf == 0 ? 0 : obj.import1), 0),2) 
             
             arr.push(objInfo)
         })
@@ -57,21 +57,31 @@ export function arrInfoPreparadaQuadresTrimestralsIVA_IRPF(state, getters) {
         data: null,
         llogater: null,
         numFra: "Total:",
-        IRPF: getters.arrInfo
+        IRPF: round( getters.arrInfo
           .filter(objInfo2 => objInfo2.trimestre === trimestre)
           .reduce((total, objInfo3) => {
             return (total += objInfo3.IRPF);
-          }, 0),
-        IVA: getters.arrInfo
+          }, 0)  ,2),
+        IVA: round( getters.arrInfo
           .filter(objInfo2 => objInfo2.trimestre === trimestre)
           .reduce((total, objInfo3) => {
             return (total += objInfo3.IVA || 0);
-          }, 0),
-        IMPORT: getters.arrInfo
+          }, 0)  ,2),
+          IMPORT: round( getters.arrInfo
           .filter(objInfo2 => objInfo2.trimestre === trimestre)
           .reduce((total, objInfo3) => {
             return (total += objInfo3.IMPORT);
-          }, 0)
+          }, 0)  ,2),
+          BI_IVA: round( getters.arrInfo
+          .filter(objInfo2 => objInfo2.trimestre === trimestre)
+          .reduce((total, objInfo3) => {
+            return (total += objInfo3.BI_IVA);
+          }, 0)  ,2),
+          BI_IRPF: round( getters.arrInfo
+          .filter(objInfo2 => objInfo2.trimestre === trimestre)
+          .reduce((total, objInfo3) => {
+            return (total += objInfo3.BI_IRPF);
+          }, 0)  ,2)
       });
 
       arr.push(obj);
@@ -91,14 +101,22 @@ export function arrInfoPreparadaQuadreResumAnual ( state, getters ) {
       if (getters.arrInfo.filter( objInfo => objInfo.nom === nom)) {
         let obj = {}
         obj.llogater = nom
-        obj[impost] = getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
+        obj[impost] = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
                         .reduce( (total, objInfo3) => {
                           return total += objInfo3[impost]
-                        }, 0)
-        obj.["BI_"+impost] = getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
+                        }, 0)  ,2)
+                        // obj["BI_"+impost] = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
+                        // .reduce( (total, objInfo3) => {
+                        //   return total += objInfo3["BI_"+impost]
+                        // }, 0)  ,2)
+        obj.BI_IVA = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
                         .reduce( (total, objInfo3) => {
-                          return total += objInfo3["BI_"+impost]
-                        }, 0)
+                          return total += objInfo3.BI_IVA
+                        }, 0)  ,2)
+        obj.BI_IRPF = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
+                        .reduce( (total, objInfo3) => {
+                          return total += objInfo3.BI_IRPF
+                        }, 0)  ,2)
         arr.push(obj)
 
       }
@@ -106,12 +124,18 @@ export function arrInfoPreparadaQuadreResumAnual ( state, getters ) {
 
     arr.push ({
       llogater : "Total:",
-      [impost] : getters.arrInfo.reduce( (total, objInfo3) => {
+      [impost] : round( getters.arrInfo.reduce( (total, objInfo3) => {
                         return total += objInfo3[impost]
-                      }, 0),
-      IMPORT : getters.arrInfo.reduce( (total, objInfo3) => {
-                        return total += objInfo3.IMPORT
                       }, 0)
+                      , 2),
+                      BI_IVA : round( getters.arrInfo.reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IVA
+                      }, 0)
+                      , 2),
+                      BI_IRPF : round( getters.arrInfo.reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IRPF
+                      }, 0)
+                      , 2)
     })
 
     console.log(arr)
@@ -134,8 +158,13 @@ function trimestre(data){
 
 function items2( items ) {
   return items.map( obj => {
-    obj.importIva = obj.import1 * obj.p_iva,
-    obj.importIrpf = obj.import1 * obj.p_irpf
+    obj.importIva = round(obj.import1 * obj.p_iva, 2),
+    obj.importIrpf = round(obj.import1 * obj.p_irpf, 2)
     return obj
   })			
 }
+
+function round (value, decimals) {
+  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+}  
+
