@@ -4,7 +4,7 @@
 
     <q-list bordered class="rounded-borders">
       <q-expansion-item
-        v-for="(objLlogater) in getArrLlogaters2"
+        v-for="(objLlogater) in arrFacturesPerClient"
         :key="objLlogater.nom"
         expand-separator
         icon="perm_identity"
@@ -24,9 +24,28 @@ export default {
 
   components: { jmg_factura },
   computed: {
-    getArrLlogaters2() {
-      return this.$store.getters["mImpostos/getArrObjLlogaters"] ;
+    getArrObjFactures() {
+      return this.$store.getters["mImpostos/getArrObjFactures"] ;
     },
+    getArrIdClients () {
+      return this.$store.getters["mImpostos/arrIdClients"] ;
+    },
+    getClients () {
+      return this.$store.state.mImpostos.clients;
+    },
+
+    arrFacturesPerClient (){
+      const arr = []
+      this.getArrIdClients.map ( id => {
+        const obj = {}
+        obj.nom = this.getClients[id].nom
+        obj.factures = this.getArrObjFactures.filter( objFactura => objFactura.idClient === id )
+
+        arr.push(obj)
+      })
+      return arr
+    }
+
   },
 };
 </script>

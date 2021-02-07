@@ -1,20 +1,28 @@
 export function getArrAnys ( state ) {
-    return state.arrFacturacio.map( objF => objF.any )
+    return state.arrActivitat.map( objF => objF.any )
 }
 
-export function getArrObjLlogaters ( state ) {
-    const obj = state.arrFacturacio.filter( objF => objF.any == state.anySeleccionat)[0]
-    return (obj == undefined) ? [] : obj.llogaters
+export function getArrObjFactures ( state ) {
+  const obj = state.arrActivitat.filter( objF => objF.any == state.anySeleccionat)[0]
+  return (obj == undefined) ? [] : obj.facturacio
+}
+
+export function getArrObjDespeses( state ) {
+  const obj = state.arrActivitat.filter( objF => objF.any == state.anySeleccionat)[0]
+  return (obj == undefined) ? [] : obj.despeses
 }
 
 
 
 export function arrInfo(state, getters) {
     const arr = []
-    getters.getArrObjLlogaters.forEach( objLl => {
-        objLl.factures.forEach ( objFactura => {
-            const objInfo = {}
-            objInfo.nom = objLl.nom
+    getters.getArrObjFactures.forEach( objFactura => {
+        // objLl.factures.forEach ( objFactura => {
+           
+        const objInfo = {}
+            objInfo.nom = state.clients[objFactura.idClient].nom
+            objInfo.idClient = objFactura.idClient
+            objInfo.idImmoble = objFactura.idImmoble
 
             objInfo.trimestre = trimestre(objFactura.data)
             objInfo.data = objFactura.data
@@ -26,7 +34,7 @@ export function arrInfo(state, getters) {
             objInfo.BI_IRPF= round( items2(objFactura.items).reduce( (total, obj) => total += (obj.p_irpf == 0 ? 0 : obj.import1), 0),2) 
             
             arr.push(objInfo)
-        })
+        // })
     })
     console.log(arr)
     return arr
@@ -94,32 +102,27 @@ export function arrInfoPreparadaQuadresTrimestralsIVA_IRPF(state, getters) {
 
 
 
-export function arrInfoPreparadaQuadreResumAnual ( state, getters ) { 
+export function arrInfoPreparadaQuadreResumAnualImpostClient ( state, getters ) { 
   return function(impost) {  
     const arr = []
-    getters.arrNomsLlogaters.forEach ( nom => {
-      if (getters.arrInfo.filter( objInfo => objInfo.nom === nom)) {
-        let obj = {}
-        obj.llogater = nom
-        obj[impost] = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
-                        .reduce( (total, objInfo3) => {
-                          return total += objInfo3[impost]
-                        }, 0)  ,2)
-                        // obj["BI_"+impost] = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
-                        // .reduce( (total, objInfo3) => {
-                        //   return total += objInfo3["BI_"+impost]
-                        // }, 0)  ,2)
-        obj.BI_IVA = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
-                        .reduce( (total, objInfo3) => {
-                          return total += objInfo3.BI_IVA
-                        }, 0)  ,2)
-        obj.BI_IRPF = round( getters.arrInfo.filter ( objInfo2  => objInfo2.nom === nom)
-                        .reduce( (total, objInfo3) => {
-                          return total += objInfo3.BI_IRPF
-                        }, 0)  ,2)
-        arr.push(obj)
+    getters.arrIdClients.forEach ( id => {
 
-      }
+      let obj = {}
+      obj.llogater = state.clients[id].nom
+      obj.cif = state.clients[id].CIF
+      obj[impost] = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idClient === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3[impost]
+                      }, 0)  ,2)
+      obj.BI_IVA = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idClient === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IVA
+                      }, 0)  ,2)
+      obj.BI_IRPF = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idClient === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IRPF
+                      }, 0)  ,2)
+      arr.push(obj)
     })
 
     arr.push ({
@@ -128,11 +131,11 @@ export function arrInfoPreparadaQuadreResumAnual ( state, getters ) {
                         return total += objInfo3[impost]
                       }, 0)
                       , 2),
-                      BI_IVA : round( getters.arrInfo.reduce( (total, objInfo3) => {
+      BI_IVA : round( getters.arrInfo.reduce( (total, objInfo3) => {
                         return total += objInfo3.BI_IVA
                       }, 0)
                       , 2),
-                      BI_IRPF : round( getters.arrInfo.reduce( (total, objInfo3) => {
+      BI_IRPF : round( getters.arrInfo.reduce( (total, objInfo3) => {
                         return total += objInfo3.BI_IRPF
                       }, 0)
                       , 2)
@@ -141,11 +144,141 @@ export function arrInfoPreparadaQuadreResumAnual ( state, getters ) {
     console.log(arr)
     return arr
   }
+
+
 }
 
 
-export function arrNomsLlogaters ( state, getters) {
-  return [...new Set(getters.getArrObjLlogaters.map(obj => obj.nom))];
+
+export function arrInfoPreparadaQuadreResumAnualImpostImmoble ( state, getters ) { 
+  return function(impost) {  
+    const arr = []
+    getters.arrIdImmobles.forEach ( id => {
+
+      let obj = {}
+      obj.immoble = state.immobles[id].ubicacio
+      obj[impost] = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3[impost]
+                      }, 0)  ,2)
+      obj.BI_IVA = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IVA
+                      }, 0)  ,2)
+      obj.BI_IRPF = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IRPF
+                      }, 0)  ,2)
+      arr.push(obj)
+    })
+
+    arr.push ({
+      llogater : "Total:",
+      [impost] : round( getters.arrInfo.reduce( (total, objInfo3) => {
+                        return total += objInfo3[impost]
+                      }, 0)
+                      , 2),
+      BI_IVA : round( getters.arrInfo.reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IVA
+                      }, 0)
+                      , 2),
+      BI_IRPF : round( getters.arrInfo.reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IRPF
+                      }, 0)
+                      , 2)
+    })
+
+    console.log(arr)
+    return arr
+  }
+
+
+}
+
+
+export function arrFitxesImmobles( state, getters ) { 
+  // return function(impost) {  
+    const arr = []
+    Object.keys(getters.getArrObjDespeses).forEach ( id => {
+
+      let obj = {}
+      obj.immoble = state.immobles[id].ubicacio
+      obj.RC = state.immobles[id].RC
+      obj.diesLloguer= getters.getArrObjDespeses[id].diesLloguer
+      obj.IRPF_indiv = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3.IRPF
+                      }, 0)  ,2)
+      obj.BI_IRPF_indiv = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
+                      .reduce( (total, objInfo3) => {
+                        return total += objInfo3.BI_IRPF
+                      }, 0)  ,2)
+
+
+      
+      // ------- DADES TOTALS ----
+
+      obj.despComunit_total = getters.getArrObjDespeses[id].despComunit
+      obj.despConservacio_total = getters.getArrObjDespeses[id].despConservacio
+      obj.IBI_total = getters.getArrObjDespeses[id].tributs.IBI
+      obj.Escombreries_total = getters.getArrObjDespeses[id].tributs.Escombreries
+      
+      obj.sumaTributs_total = round(obj.IBI_total + obj.Escombreries_total, 2)
+
+      obj.valorCadastral_total = getters.getArrObjDespeses[id].valorCadastral
+      obj.valorEdificacio_total = getters.getArrObjDespeses[id].valorEdificacio
+      obj.percAmortitzacio = getters.getArrObjDespeses[id].percAmortitzacio
+      obj.Amortitzacio_total = round( getters.getArrObjDespeses[id].percAmortitzacio *
+                               getters.getArrObjDespeses[id].valorEdificacio ,2)
+
+      obj.dataAdquisicio = state.immobles[id].DataAdquisicio
+      obj.valorAdquisicio_total = state.immobles[id].valorAdquisicio
+      obj.DespesesTributsAdquisicio_total = state.immobles[id].DespesesTributsAdquisicio
+
+
+
+
+
+      // ------- DADES INDIVIDUALS ----
+
+      obj.despComunit_indiv = round(obj.despComunit_total  / 2, 2)
+      obj.despComunit_indiv_prorrateig = round(obj.despComunit_indiv * obj.diesLloguer / 365, 2)
+      
+      obj.despConservacio_indiv = round( obj.despConservacio_total / 2, 2)
+
+      obj.IBI_indiv = round(obj.IBI_total / 2, 2)
+      obj.Escombreries_indiv = round(obj.Escombreries_total / 2, 2)
+
+      obj.sumaTributs_indiv = round( obj.IBI_indiv + obj.Escombreries_indiv, 2)
+      obj.sumaTributs_indiv_prorrateig = round(obj.sumaTributs_indiv * obj.diesLloguer / 365, 2)
+
+      obj.valorCadastral_indiv = round(obj.valorCadastral_total / 2, 2)
+      obj.valorEdificacio_indiv = round(obj.valorEdificacio_total / 2, 2)
+      obj.Amortitzacio_indiv = round(obj.Amortitzacio_total / 2, 2)
+      obj.Amortitzacio_indiv_prorrateig = round(obj.Amortitzacio_indiv * obj.diesLloguer / 365, 2)
+
+      obj.valorAdquisicio_indiv = round(obj.valorAdquisicio_total / 2, 2)
+      obj.DespesesTributsAdquisicio_indiv = round( obj.DespesesTributsAdquisicio_total / 2, 2)
+
+
+      arr.push(obj)
+    })
+
+    console.log(arr)
+    return arr
+  // }
+
+
+}
+
+
+
+export function arrIdClients ( state, getters) {
+  return [...new Set(getters.getArrObjFactures.map(obj => obj.idClient))];
+}
+
+export function arrIdImmobles ( state, getters) {
+  return [...new Set(getters.getArrObjFactures.map(obj => obj.idImmoble))];
 }
 
 

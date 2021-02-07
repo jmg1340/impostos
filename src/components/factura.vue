@@ -10,38 +10,38 @@
         </p>
         <q-list dense >
           <q-item class="text-bold">
-            <div class="col-3">CONCEPTE</div> 
-            <div class="col">IMPORT</div> 
-            <div class="col">IVA</div> 
-            <div class="col">IRPF</div> 
+            <div class="col">CONCEPTE</div> 
+            <div class="col-2 text-right">IMPORT</div> 
+            <div class="col-2 text-right">IVA</div> 
+            <div class="col-2 text-right">IRPF</div> 
           </q-item>
           <q-item v-for="(item, index) in items2" :key="factura2.data + index" class="row">
-            <div class="col">
+            <div class="col borde">
               {{ item.concepte }}
             </div>
-            <div class="col">
+            <div class="col-2 text-right borde">
               {{ item.import1 }}
             </div>
-            <div class="col">
+            <div class="col-2 text-right borde">
               <span v-if="item.p_iva != 0"> {{ item.importIva }}  ({{ item.p_iva*100 }}%)</span>
             </div>
-            <div class="col">
+            <div class="col-2 text-right borde">
               <span v-if="item.p_irpf != 0"> {{ item.importIrpf }}  ({{ item.p_irpf*100 }}%)</span>
             </div>
           </q-item>
 
-          <q-separator />
+          <!-- <q-separator /> -->
 
           <q-item>
             <div class="col"> TOTAL</div> 
-            <div class="col">{{ total.import }}</div> 
-            <div class="col">{{ total.iva }}</div> 
-            <div class="col">{{ total.irpf }}</div> 
+            <div class="col-2 text-right">{{ total.import }}</div> 
+            <div class="col-2 text-right">{{ total.iva }}</div> 
+            <div class="col-2 text-right">{{ total.irpf }}</div> 
           </q-item>
           
           
           <q-item>
-            <div class="col"> Rebut del banc hauria de ser: 
+            <div class="col">A pagar: 
               <q-chip dense class="glossy" color="red" text-color="white">{{ rebutBanc * 2}}€ </q-chip> ({{ rebutBanc }} x 2)
             </div> 
           </q-item>
@@ -83,7 +83,7 @@ export default {
     },
 
     rebutBanc () {
-      return this.total.import + this.total.iva - this.total.irpf
+      return this.round( (this.total.import + this.total.iva - this.total.irpf) , 2)
     }
   },
 
@@ -98,5 +98,8 @@ export default {
 </script>
 
 <style>
-
+  .borde {
+    border-bottom: 1px solid grey;
+    background-color: rgb(233, 233, 233);
+  }
 </style>

@@ -1,11 +1,12 @@
 <template>
 	<div class="column q-ma-md">
-		<div class="col text-h5 text-center">RESUM IVA</div>
+		<div class="col text-h5 text-center q-mb-lg">RESUM IVA (individual)</div>
 		
-		<div class="row q-gutter-md">
-			<div class="col" v-for="(objTrim, index) in getArrQuadresTrimestres" :key="index">
+		<div class="row justify-center q-gutter-md">
+			<!-- <div class="col" v-for="(objTrim, index) in getArrQuadresTrimestres" :key="index"> -->
 
 				<q-table
+						v-for="(objTrim, index) in getArrQuadresTrimestres" :key="index"
 						:title="'T' + objTrim.trimestre"
 						:data="objTrim.resumFactures"
 						:columns="columnes"
@@ -17,13 +18,13 @@
 						class="capsalera"
 					/>
 
-			</div>
+			<!-- </div> -->
 		</div>
 
 
-		<div class="row">
+		<div class="row justify-center q-mt-lg">
 
-			<div class="col-3 q-ma-md">
+			<!-- <div class="col-3 q-ma-md"> -->
 				<q-table
 						title="Resum Anual"
 						:data="getArrQuadresResumAnual"
@@ -35,7 +36,7 @@
 						:rows-per-page-options="[0]"
 						class="capsalera"
 					/>
-			</div>
+			<!-- </div> -->
 
 		</div>
 
@@ -57,6 +58,7 @@ export default {
 
 			columnesResum: [
 				{	name: 'llogater', label: 'Llogater', field: 'llogater', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
+				{	name: 'cif', label: 'CIF', field: 'cif', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
 				{	name: 'BI_IVA', label: 'BI_IVA', field: 'BI_IVA', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
 				{	name: 'iva', label: 'IVA', field: 'IVA', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
 			],
@@ -78,7 +80,7 @@ export default {
       return this.$store.getters["mImpostos/arrInfoPreparadaQuadresTrimestralsIVA_IRPF"] ;
 		},
 		getArrQuadresResumAnual() {
-      return this.$store.getters["mImpostos/arrInfoPreparadaQuadreResumAnual"]("IVA") ;
+      return this.$store.getters["mImpostos/arrInfoPreparadaQuadreResumAnualImpostClient"]("IVA") ;
 		},
 
 
@@ -95,23 +97,23 @@ export default {
   .capsalera::v-deep
 
     /* height or max-height is important */
-    height: 350px
+    // height: 350px
 
     .q-table__top
       /* bg color is important for th; just specify one */
       background-color: #f5d671
 
-    thead tr th
-      position: sticky
-      z-index: 1
-    thead tr:first-child th
-      top: 0
+    // thead tr th
+    //   position: sticky
+    //   z-index: 1
+    // thead tr:first-child th
+    //   top: 0
 
 
     /* this is when the loading indicator appears */
     &.q-table--loading thead tr:last-child th
-      /* height of all previous header rows */
-      top: 20px
+    //   /* height of all previous header rows */
+    //   top: 20px
 
 
 
