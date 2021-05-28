@@ -59,12 +59,9 @@
 									Dies de lloguer: {{ fitxa.diesLloguer }} <span class="text-grey"> de 365</span>
 								</div>
 								<div class="col">
-									Dies a disposició: {{ 365 - fitxa.diesLloguer }} <span class="text-grey"> de 365</span>
+									Dies a disposició: {{ fitxa.diesDisposicio }} <span class="text-grey"> de 365</span>
 								</div>
 							</div>
-
-
-
 						</div>
 
 						<div class="col">
@@ -75,8 +72,8 @@
 								
 								<div class="row">
 
-									<div class="col text-grey">
-										<div class=" text-bold">Despeses TOTALS</div>
+									<div class="col-auto text-grey">
+										<div class="col text-bold">Despeses TOTALS</div>
 											<ul>
 												<li>Desp. comunitaries: <span class="text-bold">{{ fitxa.despComunit_total}}</span></li>
 												<li>Desp. conservacio: <span class="text-bold">{{ fitxa.despConservacio_total}}</span></li>
@@ -102,7 +99,7 @@
 											</ul>
 									</div>
 
-									<div class="col">
+									<div class="col-auto">
 										<div class=" text-bold">Despeses INDIVIDUALS</div>
 											<ul>
 												<li>Desp. comunitaries: {{ fitxa.despComunit_indiv}} * ( {{ fitxa.diesLloguer }} / 365 ) = <span class="text-bold text-red">{{ fitxa.despComunit_indiv_prorrateig}}</span></li>
@@ -138,8 +135,8 @@
 
 						<div class="col-2">
 							<div class="column">
-								<div class="col text-bold">RENDIMENT NET</div>
-								<div class="col">
+								<div class="col text-bold">RENDIMENT NET (Lloguer)</div>
+								<div class="col q-mb-lg">
 									<div>BI: <span class="text-indigo-10">{{ fitxa.BI_IRPF_indiv }}</span> </div>
 									<div>Desp. Comunit.: <span class="text-red">- {{ fitxa.despComunit_indiv_prorrateig }}</span> </div>
 									<div>Desp. Conservacio.: <span class="text-red">- {{ fitxa.despConservacio_indiv }}</span> </div>
@@ -148,6 +145,16 @@
 									<q-separator class="q-mb-md"/>
 									<div>REND. NET: <span class="text-bold text-white bg-indigo-10 q-pa-xs">
                     {{ round( fitxa.BI_IRPF_indiv - fitxa.despComunit_indiv_prorrateig - fitxa.despConservacio_indiv - fitxa.sumaTributs_indiv_prorrateig  -  fitxa.Amortitzacio_indiv_prorrateig, 2) }}</span> </div>
+								</div>
+
+
+								<div class="col text-bold">RENDIMENT NET (a disposició)</div>
+								<div class="col">
+									<div>Valr Cadastral / 2: <span class="text-indigo-10">{{ fitxa.valorCadastral_total}}</span>   / 2</div>
+									<div>% aplicat (1,1% o 2%): <span class="text-red"> {{ fitxa.percValCadast}}</span> </div>
+									<q-separator class="q-mb-md"/>
+									<div>REND. NET prorrateig: <span class="text-bold text-white bg-indigo-10 q-pa-xs">
+                    {{ round( fitxa.RendADisposicio_indiv_prorrateig, 2) }}</span> </div>
 								</div>
 							</div>
 						</div>

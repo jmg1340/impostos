@@ -1,5 +1,10 @@
 export function getArrAnys ( state ) {
-    return state.arrActivitat.map( objF => objF.any )
+    return state.arrActivitat.map( obj => obj.any )
+}
+
+export function getDiesAny ( state ) {
+  const obj = state.arrActivitat.filter( objF => objF.any == state.anySeleccionat)[0]
+  return (obj == undefined) ? null : obj.diesAny
 }
 
 export function getArrObjFactures ( state ) {
@@ -8,7 +13,7 @@ export function getArrObjFactures ( state ) {
 }
 
 export function getArrObjDespeses( state ) {
-  const obj = state.arrActivitat.filter( objF => objF.any == state.anySeleccionat)[0]
+  const obj = state.arrActivitat.filter( objD => objD.any == state.anySeleccionat)[0]
   return (obj == undefined) ? [] : obj.despeses
 }
 
@@ -198,6 +203,7 @@ export function arrInfoPreparadaQuadreResumAnualImpostImmoble ( state, getters )
 
 export function arrFitxesImmobles( state, getters ) { 
   // return function(impost) {  
+    const diesAny = getters.getDiesAny
     const arr = []
     Object.keys(getters.getArrObjDespeses).forEach ( id => {
 
@@ -205,6 +211,8 @@ export function arrFitxesImmobles( state, getters ) {
       obj.immoble = state.immobles[id].ubicacio
       obj.RC = state.immobles[id].RC
       obj.diesLloguer= getters.getArrObjDespeses[id].diesLloguer
+      obj.diesDisposicio= getters.getArrObjDespeses[id].diesDisposicio
+      obj.percValCadast = getters.getArrObjDespeses[id].percValCadast
       obj.IRPF_indiv = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
                       .reduce( (total, objInfo3) => {
                         return total += objInfo3.IRPF
@@ -216,6 +224,7 @@ export function arrFitxesImmobles( state, getters ) {
 
 
       
+
       // ------- DADES TOTALS ----
 
       obj.despComunit_total = getters.getArrObjDespeses[id].despComunit
@@ -230,6 +239,8 @@ export function arrFitxesImmobles( state, getters ) {
       obj.percAmortitzacio = getters.getArrObjDespeses[id].percAmortitzacio
       obj.Amortitzacio_total = round( getters.getArrObjDespeses[id].percAmortitzacio *
                                getters.getArrObjDespeses[id].valorEdificacio ,2)
+      obj.RendADisposicio_total = round( getters.getArrObjDespeses[id].percValCadast *
+                               getters.getArrObjDespeses[id].valorCadastral ,2)
 
       obj.dataAdquisicio = state.immobles[id].DataAdquisicio
       obj.valorAdquisicio_total = state.immobles[id].valorAdquisicio
@@ -242,7 +253,7 @@ export function arrFitxesImmobles( state, getters ) {
       // ------- DADES INDIVIDUALS ----
 
       obj.despComunit_indiv = round(obj.despComunit_total  / 2, 2)
-      obj.despComunit_indiv_prorrateig = round(obj.despComunit_indiv * obj.diesLloguer / 365, 2)
+      obj.despComunit_indiv_prorrateig = round(obj.despComunit_indiv * obj.diesLloguer / diesAny, 2)
       
       obj.despConservacio_indiv = round( obj.despConservacio_total / 2, 2)
 
@@ -250,12 +261,14 @@ export function arrFitxesImmobles( state, getters ) {
       obj.Escombreries_indiv = round(obj.Escombreries_total / 2, 2)
 
       obj.sumaTributs_indiv = round( obj.IBI_indiv + obj.Escombreries_indiv, 2)
-      obj.sumaTributs_indiv_prorrateig = round(obj.sumaTributs_indiv * obj.diesLloguer / 365, 2)
+      obj.sumaTributs_indiv_prorrateig = round(obj.sumaTributs_indiv * obj.diesLloguer / diesAny, 2)
 
       obj.valorCadastral_indiv = round(obj.valorCadastral_total / 2, 2)
       obj.valorEdificacio_indiv = round(obj.valorEdificacio_total / 2, 2)
       obj.Amortitzacio_indiv = round(obj.Amortitzacio_total / 2, 2)
-      obj.Amortitzacio_indiv_prorrateig = round(obj.Amortitzacio_indiv * obj.diesLloguer / 365, 2)
+      obj.Amortitzacio_indiv_prorrateig = round(obj.Amortitzacio_indiv * obj.diesLloguer / diesAny, 2)
+      obj.RendADisposicio_indiv = round(obj.RendADisposicio_total / 2, 2)
+      obj.RendADisposicio_indiv_prorrateig = round(obj.RendADisposicio_indiv * obj.diesDisposicio / diesAny, 2)
 
       obj.valorAdquisicio_indiv = round(obj.valorAdquisicio_total / 2, 2)
       obj.DespesesTributsAdquisicio_indiv = round( obj.DespesesTributsAdquisicio_total / 2, 2)

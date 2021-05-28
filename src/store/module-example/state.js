@@ -1,6 +1,7 @@
+import objActivitat2018 from "../../dades/activitat2018.json"
 import objActivitat2019 from "../../dades/activitat2019.json"
 import objActivitat2020 from "../../dades/activitat2020.json"
-import objFacturacio2021 from "../../dades/facturacio2021.json"
+import objActivitat2021 from "../../dades/activitat2021.json"
 
 
 export default function () {
@@ -8,9 +9,10 @@ export default function () {
     anySeleccionat: null,
     
     arrActivitat: [
+      objActivitat2018,
       objActivitat2019,
       objActivitat2020,
-      // objFacturacio2021,
+      objActivitat2021,
     ],
 
     immobles: {
