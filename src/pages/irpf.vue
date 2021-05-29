@@ -58,8 +58,11 @@
 								<div class="col">
 									Dies de lloguer: {{ fitxa.diesLloguer }} <span class="text-grey"> de 365</span>
 								</div>
-								<div class="col">
+								<div class="col q-mb-md">
 									Dies a disposició: {{ fitxa.diesDisposicio }} <span class="text-grey"> de 365</span>
+								</div>
+								<div class="col">
+									% Propietat: <span class="text-bold text-red">{{ fitxa.percPropietat * 100}}%  </span>
 								</div>
 							</div>
 						</div>
@@ -150,7 +153,7 @@
 
 								<div class="col text-bold">RENDIMENT NET (a disposició)</div>
 								<div class="col">
-									<div>Valr Cadastral / 2: <span class="text-indigo-10">{{ fitxa.valorCadastral_total}}</span>   / 2</div>
+									<div>Valor Cadastral x  {{ fitxa.percPropietat * 100}}% : <span class="text-indigo-10">{{ fitxa.valorCadastral_total}}</span>  x  {{ fitxa.percPropietat * 100}}% </div>
 									<div>% aplicat (1,1% o 2%): <span class="text-red"> {{ fitxa.percValCadast}}</span> </div>
 									<q-separator class="q-mb-md"/>
 									<div>REND. NET prorrateig: <span class="text-bold text-white bg-indigo-10 q-pa-xs">

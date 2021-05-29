@@ -212,6 +212,7 @@ export function arrFitxesImmobles( state, getters ) {
       obj.RC = state.immobles[id].RC
       obj.diesLloguer= getters.getArrObjDespeses[id].diesLloguer
       obj.diesDisposicio= getters.getArrObjDespeses[id].diesDisposicio
+      obj.percPropietat= getters.getArrObjDespeses[id].percPropietat
       obj.percValCadast = getters.getArrObjDespeses[id].percValCadast
       obj.IRPF_indiv = round( getters.arrInfo.filter ( objInfo2  => objInfo2.idImmoble === id)
                       .reduce( (total, objInfo3) => {
@@ -252,26 +253,26 @@ export function arrFitxesImmobles( state, getters ) {
 
       // ------- DADES INDIVIDUALS ----
 
-      obj.despComunit_indiv = round(obj.despComunit_total  / 2, 2)
+      obj.despComunit_indiv = round(obj.despComunit_total  * obj.percPropietat, 2)
       obj.despComunit_indiv_prorrateig = round(obj.despComunit_indiv * obj.diesLloguer / diesAny, 2)
       
-      obj.despConservacio_indiv = round( obj.despConservacio_total / 2, 2)
+      obj.despConservacio_indiv = round( obj.despConservacio_total * obj.percPropietat, 2)
 
-      obj.IBI_indiv = round(obj.IBI_total / 2, 2)
-      obj.Escombreries_indiv = round(obj.Escombreries_total / 2, 2)
+      obj.IBI_indiv = round(obj.IBI_total * obj.percPropietat, 2)
+      obj.Escombreries_indiv = round(obj.Escombreries_total * obj.percPropietat, 2)
 
       obj.sumaTributs_indiv = round( obj.IBI_indiv + obj.Escombreries_indiv, 2)
       obj.sumaTributs_indiv_prorrateig = round(obj.sumaTributs_indiv * obj.diesLloguer / diesAny, 2)
 
-      obj.valorCadastral_indiv = round(obj.valorCadastral_total / 2, 2)
-      obj.valorEdificacio_indiv = round(obj.valorEdificacio_total / 2, 2)
-      obj.Amortitzacio_indiv = round(obj.Amortitzacio_total / 2, 2)
+      obj.valorCadastral_indiv = round(obj.valorCadastral_total * obj.percPropietat, 2)
+      obj.valorEdificacio_indiv = round(obj.valorEdificacio_total * obj.percPropietat, 2)
+      obj.Amortitzacio_indiv = round(obj.Amortitzacio_total * obj.percPropietat, 2)
       obj.Amortitzacio_indiv_prorrateig = round(obj.Amortitzacio_indiv * obj.diesLloguer / diesAny, 2)
-      obj.RendADisposicio_indiv = round(obj.RendADisposicio_total / 2, 2)
+      obj.RendADisposicio_indiv = round(obj.RendADisposicio_total * obj.percPropietat, 2)
       obj.RendADisposicio_indiv_prorrateig = round(obj.RendADisposicio_indiv * obj.diesDisposicio / diesAny, 2)
 
-      obj.valorAdquisicio_indiv = round(obj.valorAdquisicio_total / 2, 2)
-      obj.DespesesTributsAdquisicio_indiv = round( obj.DespesesTributsAdquisicio_total / 2, 2)
+      obj.valorAdquisicio_indiv = round(obj.valorAdquisicio_total * obj.percPropietat, 2)
+      obj.DespesesTributsAdquisicio_indiv = round( obj.DespesesTributsAdquisicio_total * obj.percPropietat, 2)
 
 
       arr.push(obj)

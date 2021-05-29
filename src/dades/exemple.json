@@ -1,5 +1,6 @@
 {
 	"any": 2020,
+  	"diesAny": 365,
 	"facturacio": [
 	  {
 		"data": "2020/1/1",
@@ -558,44 +559,83 @@
 		]
 	  }
 	],
-	"despeses": {
-	  "GC26": {
-		"diesLloguer": 0,
-		"despComunit": 0,
-		"despConservacio": 0,
-		"tributs": {
-		  "IBI": 0,
-		  "Escombreries": 0
-		},
-		"valorCadastral": 0,
-		"valorEdificacio": 0,
-		"percAmortitzacio": 0.03
-	  },
-	  "GC28": {
-		"diesLloguer": 365,
-		"despComunit": 0,
-		"despConservacio": 0,
-		"tributs": {
-		  "IBI": 0,
-		  "Escombreries": 0
-		},
-		"valorCadastral": 0,
-		"valorEdificacio": 0,
-		"percAmortitzacio": 0
-	  },
-	  "PI41": {
-		"diesLloguer": 365,
-		"despComunit": 0,
-		"despConservacio": 0,
-		"tributs": {
-		  "IBI": 0,
-		  "Escombreries": 0
-		},
-		"valorCadastral": 0,
-		"valorEdificacio": 0,
-		"percAmortitzacio": 0.03
-	  }
-	}
+  "despeses": {
+    "GC26": {
+      "diesLloguer": 0,
+      "diesDisposicio": 195,
+      "percPropietat": 0.5,
+      "despComunit": 0,
+      "despConservacio": 0,
+      "tributs": {
+        "IBI": 279.12,
+        "Escombreries": 396.83
+      },
+      "valorCadastral": 22222,
+      "valorEdificacio": 11111,
+      "percAmortitzacio": 0.03,
+      "percValCadast": 0.02
+    },
+    "GC28": {
+      "diesLloguer": 365,
+      "diesDisposicio": 0,
+      "percPropietat": 0.5,
+      "despComunit": 0,
+      "despConservacio": 0,
+      "tributs": {
+        "IBI": 489.95,
+        "Escombreries": 445.70
+      },
+      "valorCadastral": 22222,
+      "valorEdificacio": 11111,
+      "percAmortitzacio": 0.03,
+      "percValCadast": 0.02
+    },
+    "PI41": {
+      "diesLloguer": 365,
+      "diesDisposicio": 0,
+      "percPropietat": 0.5,
+      "despComunit": 0,
+      "despConservacio": 0,
+      "tributs": {
+        "IBI": 0,
+        "Escombreries": 0
+      },
+      "valorCadastral": 33333,
+      "valorEdificacio": 22222,
+      "percAmortitzacio": 0.03,
+      "percValCadast": 0.02
+    },
+    "CLFT": {
+      "diesLloguer": 0,
+      "diesDisposicio": 365,
+      "percPropietat": 1,
+      "despComunit": 0,
+      "despConservacio": 0,
+      "tributs": {
+        "IBI": 282.17,
+        "Escombreries": 0
+      },
+      "valorCadastral": 2222,
+      "valorEdificacio": 1111,
+      "percAmortitzacio": 0.03,
+      "percValCadast": 0.02
+    },
+    "PKNG1": {
+      "diesLloguer": 0,
+      "diesDisposicio": 365,
+      "percPropietat": 1,
+      "despComunit": 0,
+      "despConservacio": 0,
+      "tributs": {
+        "IBI": 47.76,
+        "Escombreries": 0
+      },
+      "valorCadastral": 22222,
+      "valorEdificacio": 11111,
+      "percAmortitzacio": 0.03,
+      "percValCadast": 0.02
+    }
+  }
   
   
   }

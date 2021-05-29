@@ -38,6 +38,22 @@ export default function () {
         DataAdquisicio: "01/04/1985",
         valorAdquisicio: 12500,   // RiJ
         DespesesTributsAdquisicio: 1250  // RiJ
+      },
+
+      CLFT: {
+        RC: "8026501CF1372S0070YP",
+        ubicacio: "Marina St. Jordi",
+        DataAdquisicio: "?",
+        valorAdquisicio: 0, 
+        DespesesTributsAdquisicio: 0
+      },
+
+      PKNG1: {
+        RC: "0218801DF2901G0112BR",
+        ubicacio: "Parking cotxe nens",
+        DataAdquisicio: "?",
+        valorAdquisicio: 0, 
+        DespesesTributsAdquisicio: 0
       }
     },
 
