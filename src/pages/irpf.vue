@@ -56,10 +56,10 @@
 
 							<div class="col q-mt-lg">
 								<div class="col">
-									Dies de lloguer: {{ fitxa.diesLloguer }} <span class="text-grey"> de 365</span>
+									Dies de lloguer: {{ fitxa.diesLloguer }} <span class="text-grey"> de {{ getDiesAny }}</span>
 								</div>
 								<div class="col q-mb-md">
-									Dies a disposició: {{ fitxa.diesDisposicio }} <span class="text-grey"> de 365</span>
+									Dies a disposició: {{ fitxa.diesDisposicio }} <span class="text-grey"> de {{ getDiesAny }}</span>
 								</div>
 								<div class="col">
 									% Propietat: <span class="text-bold text-red">{{ fitxa.percPropietat * 100}}%  </span>
@@ -105,9 +105,9 @@
 									<div class="col-auto">
 										<div class=" text-bold">Despeses INDIVIDUALS</div>
 											<ul>
-												<li>Desp. comunitaries: {{ fitxa.despComunit_indiv}} * ( {{ fitxa.diesLloguer }} / 365 ) = <span class="text-bold text-red">{{ fitxa.despComunit_indiv_prorrateig}}</span></li>
+												<li>Desp. comunitaries: {{ fitxa.despComunit_indiv}} * ( {{ fitxa.diesLloguer }} / {{ getDiesAny }} ) = <span class="text-bold text-red">{{ fitxa.despComunit_indiv_prorrateig}}</span></li>
 												<li>Desp. conservacio: <span class="text-bold text-red">{{ fitxa.despConservacio_indiv}}</span></li>
-												<li>Suma tributs: {{ fitxa.sumaTributs_indiv}} * ( {{ fitxa.diesLloguer }} / 365 ) = 
+												<li>Suma tributs: {{ fitxa.sumaTributs_indiv}} * ( {{ fitxa.diesLloguer }} / {{ getDiesAny }} ) = 
 												<span class="text-bold text-red"> {{ fitxa.sumaTributs_indiv_prorrateig }} </span></li>
 												<ul class="q-mb-md">
                           <li>IBI: <span class="text-bold">{{ fitxa.IBI_indiv}}</span></li>
@@ -118,7 +118,7 @@
 											<ul>
 												<li>Valor Cadastral: <span class="text-bold text-red">{{ fitxa.valorCadastral_indiv}}</span></li>
 												<li>Valor Cadastral (edif): <span class="text-bold text-red">{{ fitxa.valorEdificacio_indiv}}</span></li>
-												<li>Amortització: {{ fitxa.Amortitzacio_indiv}} * ( {{ fitxa.diesLloguer }} / 365 ) = 
+												<li>Amortització: {{ fitxa.Amortitzacio_indiv}} * ( {{ fitxa.diesLloguer }} / {{ getDiesAny }} ) = 
 												<span class="text-bold text-red"> {{ fitxa.Amortitzacio_indiv_prorrateig }} </span></li>
                         <ul class="q-mb-md">
                           <li> {{ fitxa.valorEdificacio_indiv}} *  {{ fitxa.percAmortitzacio * 100}}%</li>
@@ -217,6 +217,9 @@ export default {
 		},
 		arrFitxesImmobles() {
       return this.$store.getters["mImpostos/arrFitxesImmobles"];
+		},
+		getDiesAny() {
+      return this.$store.getters["mImpostos/getDiesAny"];
 		},
 
 	},

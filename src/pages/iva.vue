@@ -16,6 +16,7 @@
 						:pagination="initialPagination"
 						:rows-per-page-options="[0]"
 						class="capsalera"
+						hide-bottom
 					/>
 
 			<!-- </div> -->
@@ -35,6 +36,7 @@
 						:pagination="initialPagination"
 						:rows-per-page-options="[0]"
 						class="capsalera"
+						hide-bottom
 					/>
 			<!-- </div> -->
 

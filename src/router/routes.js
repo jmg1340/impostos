@@ -14,6 +14,13 @@ const routes = [
       { path: '', component: () => import('pages/facturacio.vue') }
     ]
   },
+  {
+    path: '/despesesIVA',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/despesesIVA.vue') }
+    ]
+  },
 
   {
     path: '/iva',

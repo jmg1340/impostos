@@ -17,6 +17,23 @@ export function getArrObjDespeses( state ) {
   return (obj == undefined) ? [] : obj.despeses
 }
 
+export function getArrObjDespesesIVA( state ) {
+  console.log("getArrObjDespesesIVA", state.anySeleccionat)
+  const obj = state.arrActivitat.filter( objD => objD.any == state.anySeleccionat)[0]
+  if (obj == undefined) {
+    return []
+  } else {
+    console.log("obj.despesesIVA", obj.despesesIVA)
+    let arr = (obj.despesesIVA == undefined) ? [] :  obj.despesesIVA.map((reg) => {
+      reg.iva = reg.p_IVA * reg.import,
+      reg.importAmbIva = reg.import * (1 + reg.p_IVA)
+      return reg
+    })
+    console.log("arrDespDeduibles", arr)
+    return arr
+  }
+}
+
 
 
 export function arrInfo(state, getters) {
@@ -80,17 +97,17 @@ export function arrInfoPreparadaQuadresTrimestralsIVA_IRPF(state, getters) {
           .reduce((total, objInfo3) => {
             return (total += objInfo3.IVA || 0);
           }, 0)  ,2),
-          IMPORT: round( getters.arrInfo
+        IMPORT: round( getters.arrInfo
           .filter(objInfo2 => objInfo2.trimestre === trimestre)
           .reduce((total, objInfo3) => {
             return (total += objInfo3.IMPORT);
           }, 0)  ,2),
-          BI_IVA: round( getters.arrInfo
+        BI_IVA: round( getters.arrInfo
           .filter(objInfo2 => objInfo2.trimestre === trimestre)
           .reduce((total, objInfo3) => {
             return (total += objInfo3.BI_IVA);
           }, 0)  ,2),
-          BI_IRPF: round( getters.arrInfo
+        BI_IRPF: round( getters.arrInfo
           .filter(objInfo2 => objInfo2.trimestre === trimestre)
           .reduce((total, objInfo3) => {
             return (total += objInfo3.BI_IRPF);

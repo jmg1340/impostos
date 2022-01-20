@@ -42,6 +42,10 @@
           <q-item-section>Facturació</q-item-section>
         </q-item>
         <q-separator />
+        <q-item to="/despesesIVA">
+          <q-item-section>Despeses IVA soportat</q-item-section>
+        </q-item>
+        <q-separator />
         <q-item to="/iva">
           <q-item-section>IVA</q-item-section>
         </q-item>
