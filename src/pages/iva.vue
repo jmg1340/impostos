@@ -1,10 +1,73 @@
 <template>
 	<div class="column q-ma-md">
-		<div class="col text-h5 text-center q-mb-lg">RESUM IVA (individual)</div>
+		<div class="col text-h5 text-center q-mb-xl">RESUM IVA (individual)</div>
 		
+				<q-card	v-for="T in 4" :key="T" class="q-mb-lg bg-grey-4">
+					<q-card-section class="col bg-deep-orange-10 text-white text-h5 ">
+						<!-- <q-banner class="col text-red-8 text-h4"> -->
+							Trimestre {{T}}
+							<!-- </q-banner> -->
+					</q-card-section>
+
+					<q-card-section>
+						<div class="row justify-left q-gutter-md">
+							<!-- IVA REPERCUTIT -->
+							<div class="col">
+								<q-table
+										title="IVA DEVENGAT"
+										:data="getArrQuadresTrimestres[T-1].resumFactures"
+										:columns="columnes"
+										row-key="fra"
+										separator="cell"
+										dense
+										:pagination="initialPagination"
+										:rows-per-page-options="[0]"
+										class="capsalera"
+										hide-bottom
+									/>
+							</div>
+							<div class="col">
+								<div class="column">
+									<div class="col q-mb-xl">
+										<!-- IVA SOPORTAT -->
+										<q-table
+												title="IVA DEDUIBLE"
+												:data="getArrDespesesDelsTrimestres[T-1].arrDespeses"
+												:columns="columnesDesp"
+												row-key="empresa"
+												separator="cell"
+												dense
+												:pagination="initialPagination"
+												:rows-per-page-options="[0]"
+												class="capsalera"
+												hide-bottom
+											/>
+
+									</div>
+									<div 
+										class="col bg-white text-center"
+										v-if="getArrDespesesDelsTrimestres[T-1].totalIVA != 0"
+									>
+										<q-card class="bg-yellow-3">
+											Iva DEVENGAT ({{getArrQuadresTrimestres[T-1].totalIVA}}) 
+											- Iva DEDUIBLE ({{getArrDespesesDelsTrimestres[T-1].totalIVA}}) = 
+											{{getArrQuadresTrimestres[T-1].totalIVA - getArrDespesesDelsTrimestres[T-1].totalIVA}}
+										</q-card>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</q-card-section>
+				</q-card>
+
+
 		<div class="row justify-center q-gutter-md">
 			<!-- <div class="col" v-for="(objTrim, index) in getArrQuadresTrimestres" :key="index"> -->
 
+
+<!-- 
 				<q-table
 						v-for="(objTrim, index) in getArrQuadresTrimestres" :key="index"
 						:title="'T' + objTrim.trimestre"
@@ -18,7 +81,7 @@
 						class="capsalera"
 						hide-bottom
 					/>
-
+ -->
 			<!-- </div> -->
 		</div>
 
@@ -58,6 +121,23 @@ export default {
 				{	name: 'iva', label: 'IVA', field: 'IVA', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
 			],
 
+
+			columnesDesp: [
+				{	name: 'data', label: 'Data', field: 'dataFra', classes: 'bg-grey-2 ellipsis', align:"center", headerClasses: 'bg-grey-9 text-white text-center' },
+				// {	name: 'Factura', label: 'Factura', field: 'factura', classes: 'bg-grey-2 ellipsis', align:"center", headerClasses: 'bg-grey-9 text-white text-center' },
+				{	name: 'empresa', label: 'empresa', field: 'empresa', classes: 'bg-grey-2 ellipsis', align:"left", headerClasses: 'bg-grey-9 text-white text-center' },
+				// {	name: 'Concepte', label: 'Concepte', field: 'concepte', classes: 'bg-grey-2 ellipsis', align:"left", headerClasses: 'bg-grey-9 text-white text-center' },
+				{	name: 'Import', label: 'Import', field: 'import', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
+				{	name: 'p_IVA', label: 'p_IVA', field: 'p_IVA', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
+				{	name: 'IVA', label: 'IVA', field: 'iva', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
+				// {	name: 'ImportIVA', label: 'ImportIVA', field: 'importAmbIva', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
+			],
+
+
+
+
+
+
 			columnesResum: [
 				{	name: 'llogater', label: 'Llogater', field: 'llogater', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
 				{	name: 'cif', label: 'CIF', field: 'cif', classes: 'bg-grey-2 ellipsis', headerClasses: 'bg-grey-9 text-white text-center' },
@@ -85,6 +165,12 @@ export default {
       return this.$store.getters["mImpostos/arrInfoPreparadaQuadreResumAnualImpostClient"]("IVA") ;
 		},
 
+		getArrDespesesDelsTrimestres(){
+			console.log("getArrDespesesDelTrimestre", this.$store.getters["mImpostos/arrResumDespesesIVA"])
+			return this.$store.getters["mImpostos/arrResumDespesesIVA"] ;
+			// return []
+		}
+		
 
 	},
 
