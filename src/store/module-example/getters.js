@@ -28,8 +28,8 @@ export function getArrObjDespesesIVA( state ) {
     let arr = (obj.despesesIVA == undefined) ? [] :  obj.despesesIVA.map((reg) => {
       reg.trimestre = trimestre( reg.dataFra )
       console.log("reg.trimestre", reg.trimestre)
-      reg.iva = reg.p_IVA * reg.import
-      reg.importAmbIva = reg.import * (1 + reg.p_IVA)
+      reg.iva = round(reg.p_IVA * reg.import, 2)
+      reg.importAmbIva = round(reg.import * (1 + reg.p_IVA), 2)
       return reg
     })
     console.log("arrDespDeduibles", arr)
