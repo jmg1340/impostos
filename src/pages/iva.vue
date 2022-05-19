@@ -51,7 +51,7 @@
 										<q-card class="bg-yellow-3">
 											Iva DEVENGAT ({{getArrQuadresTrimestres[T-1].totalIVA}}) 
 											- Iva DEDUIBLE ({{getArrDespesesDelsTrimestres[T-1].totalIVA}}) = 
-											{{getArrQuadresTrimestres[T-1].totalIVA - getArrDespesesDelsTrimestres[T-1].totalIVA}}
+											{{ arrodonir( getArrQuadresTrimestres[T-1].totalIVA - getArrDespesesDelsTrimestres[T-1].totalIVA , 2) }}
 										</q-card>
 									</div>
 								</div>
@@ -175,6 +175,9 @@ export default {
 	},
 
 	methods: {
+		arrodonir: function (value, decimals) {
+			return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+		}  
 	}
 	
 
