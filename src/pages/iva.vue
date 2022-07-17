@@ -50,8 +50,11 @@
 									>
 										<q-card class="bg-yellow-3">
 											Iva DEVENGAT ({{getArrQuadresTrimestres[T-1].totalIVA}}) 
-											- Iva DEDUIBLE ({{getArrDespesesDelsTrimestres[T-1].totalIVA}}) = 
-											{{ arrodonir( getArrQuadresTrimestres[T-1].totalIVA - getArrDespesesDelsTrimestres[T-1].totalIVA , 2) }}
+											- Iva DEDUIBLE ({{getArrDespesesDelsTrimestres[T-1].totalIVA}}) 
+											- Iva COMPENSAR ( {{ getObjIVACompensar[ T+"T" ]}} )= 
+											{{ arrodonir( getArrQuadresTrimestres[T-1].totalIVA 
+																		- getArrDespesesDelsTrimestres[T-1].totalIVA 
+																		- getObjIVACompensar[ T+"T" ], 2) }}
 										</q-card>
 									</div>
 								</div>
@@ -111,6 +114,10 @@
 
 <script>
 export default {
+	created () {
+		console.log("Obj. IVA Compensar:", this.getObjIVACompensar())
+	},
+
 	data(){
 		return {
 			columnes: [
@@ -163,6 +170,10 @@ export default {
 		},
 		getArrQuadresResumAnual() {
       return this.$store.getters["mImpostos/arrInfoPreparadaQuadreResumAnualImpostClient"]("IVA") ;
+		},
+
+		getObjIVACompensar() {
+      return this.$store.getters["mImpostos/getObjIVAaCompensarMesAnterior"] ;
 		},
 
 		getArrDespesesDelsTrimestres(){

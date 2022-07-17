@@ -37,6 +37,10 @@ export function getArrObjDespesesIVA( state ) {
   }
 }
 
+export function getObjIVAaCompensarMesAnterior( state ) {
+  const obj = state.arrActivitat.filter( objD => objD.any == state.anySeleccionat)[0]
+  return (obj == undefined) ? {"1T": 0, "2T": 0, "3T":0, "4T": 0} : obj.IvaACompensarMesAnterior
+}
 
 
 export function arrInfo(state, getters) {

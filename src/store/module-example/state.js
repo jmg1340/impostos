@@ -28,7 +28,7 @@ export default function() {
       GC28: {
         RC: "32277002CF5532E0001FU",
         ubicacio: "Gral Contreras, 28",
-        DataAdquisicio: "01/04/985",
+        DataAdquisicio: "01/04/1985",
         valorAdquisicio: 6600, //  RiJ
         DespesesTributsAdquisicio: 660 //  RiJ
       },
@@ -36,7 +36,7 @@ export default function() {
       PI41: {
         RC: "3530714CF5532H0001WA",
         ubicacio: "Pons d'Icart, 41",
-        DataAdquisicio: "01/04/95",
+        DataAdquisicio: "01/04/1985",
         valorAdquisicio: 12500, // RiJ
         DespesesTributsAdquisicio: 1250 // RiJ
       },
