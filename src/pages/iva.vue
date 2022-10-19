@@ -46,14 +46,15 @@
 									</div>
 									<div 
 										class="col bg-white text-center"
-										v-if="getArrDespesesDelsTrimestres[T-1].totalIVA != 0"
+										v-if="getArrDespesesDelsTrimestres[T-1].totalIVA != 0   ||
+												  getObjIVACompensar[ T+'T' ] !=0 "
 									>
 										<q-card class="bg-yellow-3">
 											Iva DEVENGAT ({{getArrQuadresTrimestres[T-1].totalIVA}}) 
 											- Iva DEDUIBLE ({{getArrDespesesDelsTrimestres[T-1].totalIVA}}) 
 											- Iva COMPENSAR ( {{ getObjIVACompensar[ T+"T" ]}} )= 
 											{{ arrodonir( getArrQuadresTrimestres[T-1].totalIVA 
-																		- getArrDespesesDelsTrimestres[T-1].totalIVA 
+																		- getArrDespesesDelsTrimestres[T-1].totalIVA
 																		- getObjIVACompensar[ T+"T" ], 2) }}
 										</q-card>
 									</div>
@@ -115,7 +116,8 @@
 <script>
 export default {
 	created () {
-		console.log("Obj. IVA Compensar:", this.getObjIVACompensar())
+		// console.log("getObjIVACompensar:", this.getObjIVACompensar())
+		console.log("getArrDespesesDelsTrimestres:", this.getArrDespesesDelsTrimestres())
 	},
 
 	data(){
@@ -173,6 +175,8 @@ export default {
 		},
 
 		getObjIVACompensar() {
+			console.log("==================")
+			console.log(this.$store.getters["mImpostos/getObjIVAaCompensarMesAnterior"]);
       return this.$store.getters["mImpostos/getObjIVAaCompensarMesAnterior"] ;
 		},
 
